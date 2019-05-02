@@ -27,6 +27,7 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+  scope :with_preloads,   -> { includes(user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user, counter_cache: true
   has_one :audio_feature, dependent: :destroy
@@ -95,7 +96,7 @@ class Asset < ApplicationRecord
   end
 
   def self.latest(limit = 10)
-    includes(user: :pic).limit(limit).order('assets.id DESC')
+    with_preloads.limit(limit).order('assets.id DESC')
   end
 
   def self.id_not_in(asset_ids)
