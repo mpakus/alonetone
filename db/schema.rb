@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_134953) do
+ActiveRecord::Schema.define(version: 2019_05_02_084655) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -221,18 +221,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "pic_file_size"
-    t.string "pic_content_type"
-    t.string "pic_file_name"
-    t.integer "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "picable_type"
-    t.integer "picable_id"
-    t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
-  end
-
   create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.text "description", size: :long
@@ -240,7 +228,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "pic_id"
     t.string "permalink"
     t.integer "tracks_count", default: 0
     t.boolean "is_mix"
@@ -255,8 +242,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.boolean "has_details", default: false
     t.string "theme"
     t.datetime "published_at"
-    t.datetime "deleted_at"
     t.integer "cover_quality", default: 2
+    t.datetime "deleted_at"
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
@@ -288,7 +275,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.string "instagram"
     t.string "website"
     t.string "user_agent"
-    t.datetime "updated_at"
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
