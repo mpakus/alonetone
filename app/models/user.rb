@@ -83,7 +83,6 @@ class User < ApplicationRecord
   after_commit :process_variants
 
   # Can create music
-  has_one    :pic, as: :picable, dependent: :destroy
   has_one    :profile, dependent: :destroy
   has_many   :assets,
     -> { order('assets.id DESC') },
