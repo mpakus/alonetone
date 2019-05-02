@@ -23,7 +23,7 @@ end
 #  twitter    :string(255)
 #  user_agent :string(255)
 #  website    :string(255)
-#  updated_at :datetime
+#  updated_at :datetime         not null
 #  user_id    :integer
 #
 # Indexes
