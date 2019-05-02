@@ -1,6 +1,17 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  describe 'scopes' do
+    it 'include profile and avatar image to prevent n+1 queries' do
+      expect do
+        User.with_preloads.each do |user|
+          user.avatar_image
+          user.profile.bio
+        end
+      end.to perform_queries(count: 4)
+    end
+  end
+
   context "validation" do
     it "should be valid with email, login and password" do
       expect(new_user).to be_valid
