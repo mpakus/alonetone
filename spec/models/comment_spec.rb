@@ -8,9 +8,11 @@ RSpec.describe Comment, type: :model do
       expect do
         Comment.with_preloads.each do |comment|
           comment.commenter&.avatar_image
-          comment.commentable.user.avatar_image
+          if commentable = comment.commentable
+            commentable.user.avatar_image
+          end
         end
-      end.to perform_queries(count: 6)
+      end.to perform_queries(count: 7)
     end
   end
 
