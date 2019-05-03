@@ -13,7 +13,6 @@ class Playlist < ActiveRecord::Base
   scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user, counter_cache: true
-  has_one  :pic, as: :picable, dependent: :destroy
   has_many :tracks,
      -> { order(:position).includes(asset: :user) },
      dependent: :destroy
