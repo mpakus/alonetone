@@ -1,16 +1,35 @@
-class User
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+  module Statistics
+    class Error < StandardError
+    end
+
+    SECONDS_IN_DAY = 60 * 60 * 24
+
+    # Returns average number of listens per day the user had since they started
+    # uploading music.
+    def listens_per_day
+      (listens_count.to_f / days_since_started_publishing).ceil
+    rescue StandardError => error
+      raise User::Statistics::Error, error.message
+    end
+
+    private
+
+    def started_publishing_at
+      assets.order(:created_at).first.created_at
+    end
+
+    def days_since_started_publishing
+      ((Time.now - started_publishing_at) / SECONDS_IN_DAY).ceil
+    end
+  end
+
   def self.calculate_bandwidth_used
     User.select(:id, :created_at).find_each(batch_size: 500) do |u|
       User.where(id: u.id).update_all(bandwidth_used: u.calculate_bandwidth_used)
     end
-  end
-
-  def listens_average
-    first_created_at = assets.limit(1).order('created_at').first.created_at
-
-    x = ((Time.now - first_created_at) / 60 / 60 / 24).ceil
-
-    (listens_count.to_f / x).ceil
   end
 
   def number_of_tracks_listened_to

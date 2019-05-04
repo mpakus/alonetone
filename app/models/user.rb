@@ -1,6 +1,10 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include SoftDeletion
   include Rakismet::Model
+
+  require_dependency 'user/statistics'
+
+  include User::Statistics
 
   rakismet_attrs  author: proc { display_name },
                   author_email: proc { email },

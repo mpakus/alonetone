@@ -1,3 +1,6 @@
+# NOTE: make sure to update the listens_count in users.yml when you edit
+# this file.
+
 valid_listen:
   listener: sudara
   asset: valid_mp3
@@ -6,3 +9,49 @@ another_valid_listen:
   listener: arthur
   asset: valid_mp3
   track_owner: sudara
+
+# William Shatner listens to Will Studd's Rockfort playlist.
+bill_listens_to_will_1:
+  listener: william_shatner
+  track_owner: will_studd
+  asset: will_studd_rockfort_combalou
+  source: direct hit
+  ip: fc00:1:1::3
+  user_agent: Mozilla/1.0
+  city: ~
+  country: ~
+  created_at: <%= 2.weeks.ago %>
+  updated_at: <%= 2.weeks.ago %>
+bill_listens_to_will_2:
+  listener: william_shatner
+  track_owner: will_studd
+  asset: will_studd_rockfort_white_wild_tangy
+  source: direct hit
+  ip: fc00:1:1::3
+  user_agent: Mozilla/1.0
+  city: ~
+  country: ~
+  created_at: <%= 2.weeks.ago + 2.minutes %>
+  updated_at: <%= 2.weeks.ago + 2.minutes %>
+bill_listens_to_will_3:
+  listener: william_shatner
+  track_owner: will_studd
+  asset: will_studd_magnificent_lacaune
+  source: direct hit
+  ip: fc00:1:1::3
+  user_agent: Mozilla/1.0
+  city: ~
+  country: ~
+  created_at: <%= 2.weeks.ago + 4.minutes %>
+  updated_at: <%= 2.weeks.ago + 4.minutes %>
+bill_listens_to_will_4:
+  listener: william_shatner
+  track_owner: will_studd
+  asset: will_studd_appellation_controlee
+  source: direct hit
+  ip: fc00:1:1::3
+  user_agent: Mozilla/1.0
+  city: ~
+  country: ~
+  created_at: <%= 2.weeks.ago + 6.minutes %>
+  updated_at: <%= 2.weeks.ago + 6.minutes %>
